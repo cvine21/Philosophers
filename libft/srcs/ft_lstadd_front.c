@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                     :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 18:25:06 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/12 18:26:18 by cvine            ###   ########.fr       */
+/*   Created: 2021/10/17 11:09:55 by cvine             #+#    #+#             */
+/*   Updated: 2021/10/17 11:10:53 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include "libft.h"
-# include <pthread.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/time.h>
-
-typedef struct s_philo
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int	id;
-}	t_philo;
-
-int check_if_number(char **argv);
-int	*get_int_argv(int argc, char **argv);
-
-#endif
+	if (!lst || !new)
+		return ;
+	new -> next = *lst;
+	*lst = new;
+}

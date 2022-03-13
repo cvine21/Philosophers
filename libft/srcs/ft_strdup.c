@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                     :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 18:25:06 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/12 18:26:18 by cvine            ###   ########.fr       */
+/*   Created: 2021/10/09 17:20:42 by cvine             #+#    #+#             */
+/*   Updated: 2021/10/20 17:30:44 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include "libft.h"
-# include <pthread.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/time.h>
-
-typedef struct s_philo
+char	*ft_strdup(const char *s1)
 {
-	int	id;
-}	t_philo;
+	char	*cpy;
+	size_t	len;
 
-int check_if_number(char **argv);
-int	*get_int_argv(int argc, char **argv);
-
-#endif
+	len = ft_strlen(s1);
+	cpy = NULL;
+	cpy = (char *)malloc(sizeof(char) * (len + 1));
+	if (!cpy)
+		return (NULL);
+	ft_strlcpy(cpy, s1, len + 1);
+	return (cpy);
+}

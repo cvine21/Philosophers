@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                     :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 18:25:06 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/12 18:26:18 by cvine            ###   ########.fr       */
+/*   Created: 2021/10/16 14:11:16 by cvine             #+#    #+#             */
+/*   Updated: 2021/10/20 17:26:45 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include "libft.h"
-# include <pthread.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/time.h>
-
-typedef struct s_philo
+void	ft_bzero(void *s, size_t n)
 {
-	int	id;
-}	t_philo;
+	size_t	i;
 
-int check_if_number(char **argv);
-int	*get_int_argv(int argc, char **argv);
-
-#endif
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)s)[i] = 0;
+		i++;
+	}
+}

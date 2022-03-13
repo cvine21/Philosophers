@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                     :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 18:25:06 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/12 18:26:18 by cvine            ###   ########.fr       */
+/*   Created: 2021/10/17 13:38:04 by cvine             #+#    #+#             */
+/*   Updated: 2021/10/20 17:07:11 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include "libft.h"
-# include <pthread.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/time.h>
-
-typedef struct s_philo
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	id;
-}	t_philo;
+	t_list	*new;
+	t_list	*head;
 
-int check_if_number(char **argv);
-int	*get_int_argv(int argc, char **argv);
-
-#endif
+	head = NULL;
+	if (lst && f)
+	{
+		while (lst)
+		{
+			new = ft_lstnew(f(lst->content));
+			if (!new)
+			{
+				ft_lstclear(&head, del);
+				return (NULL);
+			}
+			ft_lstadd_back(&head, new);
+			lst = lst->next;
+		}
+	}
+	return (head);
+}

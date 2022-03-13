@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                     :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 18:25:06 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/12 18:26:18 by cvine            ###   ########.fr       */
+/*   Created: 2021/10/16 10:57:58 by cvine             #+#    #+#             */
+/*   Updated: 2021/10/20 17:11:35 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include "libft.h"
-# include <pthread.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/time.h>
-
-typedef struct s_philo
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int	id;
-}	t_philo;
+	t_list	*last;
 
-int check_if_number(char **argv);
-int	*get_int_argv(int argc, char **argv);
-
-#endif
+	if (lst && new)
+	{
+		last = *lst;
+		if (!last)
+			*lst = new;
+		else
+		{
+			last = ft_lstlast(*lst);
+			last->next = new;
+		}
+	}
+}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   multithreading_in_c.c                              :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 18:55:32 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/12 19:50:42 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/13 19:35:37 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,18 @@
 
 int main(int argc, char **argv)
 {
+	(void) argc;
 	int i;
+	int *args;
 
 	i = -1;
-
 	if (argc < 5 | argc > 6)
 	{
 		printf("Invalid number of arguments, must be 5 or 6(optional).\n");
 		return (0);
 	}
+	args = get_int_argv(argc, argv + 1);
+	if (!argc)
+		return (1);
 	return (0);
 }

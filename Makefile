@@ -2,9 +2,11 @@ NAME		=	philo
 
 HEADER_PATH	=	includes/
 
+LIBFT		=	libft/
+
 SRCS_PATH	= 	srcs/
 
-SRCS_LIST	=	multithreading_in_c.c
+SRCS_LIST	=	philo.c		parse.c
 
 HEADER		=	$(addprefix $(HEADER_PATH), philo.h)
 
@@ -14,28 +16,29 @@ OBJS		=	$(patsubst %.c, %.o, $(SRCS))
 
 CC			=	gcc
 
-INCLUDES	=	-I$(HEADER_PATH)
+INCLUDES	=	-I$(HEADER_PATH) -I$(LIBFT)$(HEADER_PATH)
 
 CFLAGS		=	-Wall -Wextra -Werror $(INCLUDES)
 
-RM			=	rm -f
-
-PTHREAD 	=	-lpthread
+LIB_FLAGS 	=	-L$(LIBFT) -lft -lpthread
 
 .PHONY		:	all clean fclean re
 
 all			:	$(NAME)
 
 $(NAME)		:	$(OBJS) $(HEADER)
-	$(CC) $(CFLAGS) $(PTHREAD) $(OBJS) -o $@
+	$(MAKE) -C $(LIBFT)
+	$(CC) $(CFLAGS) $(LIB_FLAGS) $(OBJS) -o $@
 
 %.o			:	%.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean		:
+	$(MAKE) clean -C $(LIBFT)
 	$(RM) $(OBJS)
 
 fclean		:	clean
+	$(MAKE) fclean -C $(LIBFT)
 	$(RM) $(NAME)
 
 re			:	fclean all

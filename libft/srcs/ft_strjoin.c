@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                     :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 18:25:06 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/12 18:26:18 by cvine            ###   ########.fr       */
+/*   Created: 2021/10/10 11:42:33 by cvine             #+#    #+#             */
+/*   Updated: 2021/10/20 17:31:27 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include "libft.h"
-# include <pthread.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/time.h>
-
-typedef struct s_philo
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	id;
-}	t_philo;
+	char	*joint;
+	size_t	bufsize;
 
-int check_if_number(char **argv);
-int	*get_int_argv(int argc, char **argv);
-
-#endif
+	if (!s1 || !s2)
+		return (NULL);
+	bufsize = ft_strlen(s1) + ft_strlen(s2) + 1;
+	if (!s1 || !s2)
+		return (NULL);
+	joint = (char *)malloc(sizeof(char) * bufsize);
+	if (!joint)
+		return (NULL);
+	ft_strlcpy(joint, s1, bufsize);
+	ft_strlcat(joint, s2, bufsize);
+	return (joint);
+}

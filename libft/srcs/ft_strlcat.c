@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                     :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 18:25:06 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/12 18:26:18 by cvine            ###   ########.fr       */
+/*   Created: 2021/10/09 17:20:55 by cvine             #+#    #+#             */
+/*   Updated: 2021/10/20 17:31:36 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "libft.h"
 
-# include "libft.h"
-# include <pthread.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/time.h>
-
-typedef struct s_philo
+size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
-	int	id;
-}	t_philo;
+	size_t	j;
+	size_t	dstlen;
 
-int check_if_number(char **argv);
-int	*get_int_argv(int argc, char **argv);
-
-#endif
+	j = 0;
+	dstlen = ft_strlen(dst);
+	if (dstsize <= dstlen)
+		return (dstsize + ft_strlen(src));
+	while (src[j] && j < (dstsize - dstlen - 1))
+	{
+		dst[dstlen + j] = src[j];
+		j++;
+	}
+	dst[dstlen + j] = '\0';
+	return (dstlen + ft_strlen(src));
+}
