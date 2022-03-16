@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:52:20 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/13 19:24:50 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/16 15:59:11 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,20 @@ int check_if_number(char **argv)
 	return (0);
 }
 
-int	*get_int_argv(int argc, char **argv)
+int is_valid_argv(int index, int intArgv)
+{
+	if (index == 0 && intArgv < 2)
+		printf("Error\nThere must be at least 2 philosophers\n");
+	else if (index > 0 && index < 4 && intArgv < 0)
+		printf("Error\nThe time value cannot be negative\n");
+	else if (index == 4 && intArgv < 0)
+		printf("Error\nEach philosopher must eat times cannot be negative\n");
+	else
+		return (0);
+	return (1);
+}
+
+int	*cast_argv_to_int(int argc, char **argv)
 {
 	int i;
 	int *intArgv;
@@ -42,6 +55,8 @@ int	*get_int_argv(int argc, char **argv)
 	while (*argv)
 	{
 		intArgv[i] = ft_atoi(*argv);
+		if (is_valid_argv(i, intArgv[i]))
+			return (NULL);
 		argv++;
 		i++;
 	}

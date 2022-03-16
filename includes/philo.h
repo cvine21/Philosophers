@@ -21,12 +21,34 @@
 # include <string.h>
 # include <sys/time.h>
 
+typedef enum e_state
+{
+	hungry,
+	eating,
+	sleeping
+}	t_state;
+
+typedef struct s_arg
+{
+	unsigned int	philosophers_num;
+	unsigned int	die_time;
+	unsigned int	eat_time;
+	unsigned int	sleep_time;
+	unsigned int	each_philo_must_eat_times;
+}	t_arg;
+
 typedef struct s_philo
 {
-	int	id;
+	int				id;
+	t_state			state;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*rigt_fork;
 }	t_philo;
 
-int check_if_number(char **argv);
-int	*get_int_argv(int argc, char **argv);
+int		check_if_number(char **argv);
+int		*cast_argv_to_int(int argc, char **argv);
+int		is_valid_argv(int index, int intArgv);
+
+t_arg	*init_args(int argc, char **argv);
 
 #endif
