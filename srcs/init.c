@@ -6,21 +6,21 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:27:02 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/19 18:02:34 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/19 20:13:23 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_philo(int num_of_philos, pthread_mutex_t *fork)
+t_philo	*init_philo(int num_of_philos, pthread_mutex_t *fork)
 {
 	int i;
-	t_philo *philo;
+	t_philo *philo;	
 
 	i = 0;
 	philo = malloc(sizeof(t_philo) * num_of_philos);
 	if (!philo)
-		return (1);
+		return (NULL);
 	while (i < num_of_philos)
 	{
 		philo[i].id = i + 1;
@@ -30,7 +30,7 @@ int	init_philo(int num_of_philos, pthread_mutex_t *fork)
 		pthread_mutex_init(fork + i, NULL);
 		i++;
 	}
-	return (0);
+	return (philo);
 }
 
 t_param *init_params(int argc, char **argv)
@@ -62,11 +62,15 @@ t_param *init_params(int argc, char **argv)
 int init_simulation(int *args, t_param *param)
 {
 	pthread_mutex_t	*fork;
+	t_philo			*philo;
 
 	fork = malloc(sizeof(pthread_mutex_t) * args[0]);
 	if (!fork)
 		return (1);
-	if (!init_philo(param->num_of_philos, fork))
+	philo = init_philo(param->num_of_philos, fork);
+	if (!philo)
+		return (1);
+	if (!create_philos(param->num_of_philos, philo))
 		return (1);
 	return (0);
 }

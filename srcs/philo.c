@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 18:55:32 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/19 17:57:02 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/19 19:50:36 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int main(int argc, char **argv)
 	param = init_params(argc, argv);
 	if (!param)
 		return (1);
-	init_simulation(param->args, param);
+	if (!init_simulation(param->args, param))
+		return (1);
 	return (0);
 }

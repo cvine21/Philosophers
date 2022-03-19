@@ -51,9 +51,11 @@ int		check_if_number(char **argv);
 int		*cast_argv_to_int(int argc, char **argv);
 int		is_valid_argv(int index, int intArgv);
 
-t_param	*init_params(int argc, char **argv);
 long	get_time(void);
-int		init_philo(int num_of_philos, pthread_mutex_t *fork);
+
+t_param	*init_params(int argc, char **argv);
+t_philo	*init_philo(int num_of_philos, pthread_mutex_t *fork);
 int		init_simulation(int *args, t_param *param);
+int		create_philos(int num_of_philos, t_philo *philo);
 
 #endif
