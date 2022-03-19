@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 18:55:32 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/16 17:00:58 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/19 17:57:02 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 int main(int argc, char **argv)
 {
 	int		i;
-	t_arg	*param;
+	t_param	*param;
 
 	i = -1;
 	if (argc < 5 | argc > 6)
@@ -63,9 +63,9 @@ int main(int argc, char **argv)
 		printf("Invalid number of arguments, must be 5 or 6(optional).\n");
 		return (0);
 	}
-	param = init_args(argc, argv);
+	param = init_params(argc, argv);
 	if (!param)
 		return (1);
-	// printf("%u\n%u\n%u\n%u\n%u\n", param->philosophers_num, param->die_time, param->eat_time, param->sleep_time, param->each_philo_must_eat_times);
+	init_simulation(param->args, param);
 	return (0);
 }

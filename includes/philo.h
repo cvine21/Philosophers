@@ -23,32 +23,37 @@
 
 typedef enum e_state
 {
-	hungry,
+	thinking,
 	eating,
 	sleeping
 }	t_state;
 
-typedef struct s_arg
+typedef struct s_param
 {
-	unsigned int	philosophers_num;
-	unsigned int	die_time;
-	unsigned int	eat_time;
-	unsigned int	sleep_time;
-	unsigned int	each_philo_must_eat_times;
-}	t_arg;
+	int		*args;
+	long	start_time;
+	int		num_of_philos;
+	int		die_time;
+	int		eat_time;
+	int		sleep_time;
+	int		each_philo_must_eat_times;
+}	t_param;
 
 typedef struct s_philo
 {
 	int				id;
 	t_state			state;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*rigt_fork;
+	pthread_mutex_t	left_fork;
+	pthread_mutex_t	right_fork;
 }	t_philo;
 
 int		check_if_number(char **argv);
 int		*cast_argv_to_int(int argc, char **argv);
 int		is_valid_argv(int index, int intArgv);
 
-t_arg	*init_args(int argc, char **argv);
+t_param	*init_params(int argc, char **argv);
+long	get_time(void);
+int		init_philo(int num_of_philos, pthread_mutex_t *fork);
+int		init_simulation(int *args, t_param *param);
 
 #endif
