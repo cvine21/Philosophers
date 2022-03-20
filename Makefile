@@ -6,7 +6,7 @@ LIBFT		=	libft/
 
 SRCS_PATH	= 	srcs/
 
-SRCS_LIST	=	philo.c		parse.c		init.c\
+SRCS_LIST	=	main.c		parse.c		init.c\
 				gettime.c	create_philos.c
 
 HEADER		=	$(addprefix $(HEADER_PATH), philo.h)

@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:27:02 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/19 20:13:23 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/20 18:07:36 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_philo	*init_philo(int num_of_philos, pthread_mutex_t *fork)
 {
-	int i;
-	t_philo *philo;	
+	int		i;
+	t_philo	*philo;	
 
 	i = 0;
 	philo = malloc(sizeof(t_philo) * num_of_philos);
@@ -33,38 +33,35 @@ t_philo	*init_philo(int num_of_philos, pthread_mutex_t *fork)
 	return (philo);
 }
 
-t_param *init_params(int argc, char **argv)
+t_param	*init_params(int argc, char **argv)
 {
 	t_param	*param;
-	int		*intArgv;
+	int		*int_argv;
 
-	intArgv = cast_argv_to_int(argc, argv + 1);
-	if (!intArgv)
+	int_argv = cast_argv_to_int(argc, argv + 1);
+	if (!int_argv)
 		return (NULL);
-
 	param = malloc(sizeof(t_param));
 	if (!param)
 		return (NULL);
-
-	param->args = intArgv;
-	param->num_of_philos = intArgv[0];
-	param->die_time = intArgv[1];
-	param->eat_time = intArgv[2];
-	param->sleep_time = intArgv[3];
+	param->num_of_philos = int_argv[0];
+	param->die_time = int_argv[1];
+	param->eat_time = int_argv[2];
+	param->sleep_time = int_argv[3];
 	param->start_time = get_time();
 	if (argc == 6)
-		param->each_philo_must_eat_times = intArgv[4];
+		param->each_philo_must_eat_times = int_argv[4];
 	else
 		param->each_philo_must_eat_times = -1;
 	return (param);
 }
 
-int init_simulation(int *args, t_param *param)
+int	init_simulation(t_param *param)
 {
 	pthread_mutex_t	*fork;
 	t_philo			*philo;
 
-	fork = malloc(sizeof(pthread_mutex_t) * args[0]);
+	fork = malloc(sizeof(pthread_mutex_t) * param->num_of_philos);
 	if (!fork)
 		return (1);
 	philo = init_philo(param->num_of_philos, fork);
