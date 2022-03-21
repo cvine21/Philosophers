@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 17:18:39 by cvine             #+#    #+#             */
-/*   Updated: 2021/10/20 17:29:23 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/21 19:54:42 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	sp1 = (unsigned char *)s1;
 	sp2 = (unsigned char *)s2;
 	if (!n)
-		return (0);
+		return (EXIT_SUCCESS);
 	while (*sp1 == *sp2 && i < n - 1)
 	{
 		sp1++;

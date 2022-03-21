@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 17:21:32 by cvine             #+#    #+#             */
-/*   Updated: 2021/10/20 17:32:21 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/21 19:54:42 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 			return (us1[i] - us2[i]);
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

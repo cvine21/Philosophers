@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 18:55:32 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/20 18:07:48 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/21 21:03:58 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 // 	pthread_mutex_init(&mutex, NULL);
 // 	if (pthread_create(&t1, NULL, &routine, NULL))
 // 	{
-// 		return (1);
+// 		return (EXIT_FAILURE);
 // 	}
 // 	if (pthread_create(&t2, NULL, &routine, NULL))
 // 	{
@@ -49,24 +49,21 @@
 // 	}
 // 	pthread_mutex_destroy(&mutex);
 // 	printf("Number of mails: %d", mails);
-// 	return (0);
+// 	return (EXIT_SUCCESS);
 // }
 
 int main(int argc, char **argv)
 {
-	int		i;
+	int		*int_argv;
 	t_param	*param;
 
-	i = -1;
-	if (argc < 5 | argc > 6)
-	{
-		printf("Invalid number of arguments, must be 5 or 6(optional).\n");
-		return (0);
-	}
-	param = init_params(argc, argv);
+	int_argv = parse(argc, argv);
+	if (!int_argv)
+		return (EXIT_FAILURE);
+	param = init_struct_param(argc, int_argv);
 	if (!param)
-		return (1);
-	if (!init_simulation(param))
-		return (1);
-	return (0);
+		return (EXIT_FAILURE);
+	if (!create_philo_threads(param->num_of_philos, param->philo))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

@@ -28,16 +28,6 @@ typedef enum e_state
 	sleeping
 }	t_state;
 
-typedef struct s_param
-{
-	long	start_time;
-	int		num_of_philos;
-	int		die_time;
-	int		eat_time;
-	int		sleep_time;
-	int		each_philo_must_eat_times;
-}	t_param;
-
 typedef struct s_philo
 {
 	int				id;
@@ -46,14 +36,21 @@ typedef struct s_philo
 	pthread_mutex_t	right_fork;
 }	t_philo;
 
-int		check_if_number(char **argv);
-int		*cast_argv_to_int(int argc, char **argv);
-int		is_valid_argv(int index, int int_argv);
+typedef struct s_param
+{
+	long	start_time;
+	int		num_of_philos;
+	int		die_time;
+	int		eat_time;
+	int		sleep_time;
+	int		each_philo_must_eat_times;
+	t_philo *philo;
+}	t_param;
+
+int		*parse(int argc, char **argv);
 long	get_time(void);
 
-t_param	*init_params(int argc, char **argv);
-t_philo	*init_philo(int num_of_philos, pthread_mutex_t *fork);
-int		init_simulation(t_param *param);
-int		create_philos(int num_of_philos, t_philo *philo);
+t_param	*init_struct_param(int argc, int *int_argv);
+int		create_philo_threads(int num_of_philos, t_philo *philo);
 
 #endif

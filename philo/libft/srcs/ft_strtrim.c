@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 10:49:11 by cvine             #+#    #+#             */
-/*   Updated: 2021/10/20 17:32:46 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/21 19:54:42 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_trimlen(char const *s1, char const *set)
 	i = 0;
 	trimlen = ft_strlen(s1);
 	if (!*s1)
-		return (0);
+		return (EXIT_SUCCESS);
 	while (s1[trimlen - 1] && set[i])
 	{
 		if (s1[trimlen - 1] != set[i])

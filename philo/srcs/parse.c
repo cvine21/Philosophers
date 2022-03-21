@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:52:20 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/20 12:02:24 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/21 21:04:14 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	check_if_number(char **argv)
 		if (ft_isnumber(argv[i]))
 		{
 			printf("Error\nThe argument \"%s\" is not a number\n", argv[i]);
-			return (1);
+			return (EXIT_FAILURE);
 		}
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	is_valid_argv(int index, int int_argv)
@@ -37,8 +37,8 @@ int	is_valid_argv(int index, int int_argv)
 	else if (index == 4 && int_argv < 0)
 		printf("Error\nEach philosopher must eat times cannot be negative\n");
 	else
-		return (0);
-	return (1);
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
 
 int	*cast_argv_to_int(int argc, char **argv)
@@ -60,5 +60,20 @@ int	*cast_argv_to_int(int argc, char **argv)
 		argv++;
 		i++;
 	}
+	return (int_argv);
+}
+
+int *parse(int argc, char **argv)
+{
+	int		*int_argv;
+
+	if (argc < 5 | argc > 6)
+	{
+		printf("Invalid number of arguments, must be 5 or 6(optional).\n");
+		return (NULL);
+	}
+	int_argv = cast_argv_to_int(argc, argv + 1);
+	if (!int_argv)
+		return (NULL);
 	return (int_argv);
 }

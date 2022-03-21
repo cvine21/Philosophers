@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:27:46 by cvine             #+#    #+#             */
-/*   Updated: 2021/10/20 17:28:09 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/21 19:54:19 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ft_nlen(int n)
 
 	nlen = 0;
 	if (!n)
-		return (1);
+		return (EXIT_FAILURE);
 	if (n < 0)
 	{
 		n = -n;

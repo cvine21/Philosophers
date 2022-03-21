@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:00:37 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/13 15:03:25 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/21 19:54:42 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	ft_isnumber(char *str)
 {
 	if (!str)
-		return (1);
+		return (EXIT_FAILURE);
 	if (*str == '-')
 		str++;
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
-			return (1);
+			return (EXIT_FAILURE);
 		str++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

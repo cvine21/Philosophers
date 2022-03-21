@@ -6,18 +6,22 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:27:02 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/20 18:07:36 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/21 21:02:59 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_philo	*init_philo(int num_of_philos, pthread_mutex_t *fork)
+t_philo	*init_stuct_philo(int num_of_philos)
 {
 	int		i;
-	t_philo	*philo;	
+	t_philo	*philo;
+	pthread_mutex_t	*fork;
 
 	i = 0;
+	fork = malloc(sizeof(pthread_mutex_t) * num_of_philos);
+	if (!fork)
+		return (NULL);
 	philo = malloc(sizeof(t_philo) * num_of_philos);
 	if (!philo)
 		return (NULL);
@@ -33,14 +37,10 @@ t_philo	*init_philo(int num_of_philos, pthread_mutex_t *fork)
 	return (philo);
 }
 
-t_param	*init_params(int argc, char **argv)
+t_param	*init_struct_param(int argc, int *int_argv)
 {
 	t_param	*param;
-	int		*int_argv;
 
-	int_argv = cast_argv_to_int(argc, argv + 1);
-	if (!int_argv)
-		return (NULL);
 	param = malloc(sizeof(t_param));
 	if (!param)
 		return (NULL);
@@ -53,21 +53,6 @@ t_param	*init_params(int argc, char **argv)
 		param->each_philo_must_eat_times = int_argv[4];
 	else
 		param->each_philo_must_eat_times = -1;
+	param->philo = init_stuct_philo(param->num_of_philos);
 	return (param);
-}
-
-int	init_simulation(t_param *param)
-{
-	pthread_mutex_t	*fork;
-	t_philo			*philo;
-
-	fork = malloc(sizeof(pthread_mutex_t) * param->num_of_philos);
-	if (!fork)
-		return (1);
-	philo = init_philo(param->num_of_philos, fork);
-	if (!philo)
-		return (1);
-	if (!create_philos(param->num_of_philos, philo))
-		return (1);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:05:08 by cvine             #+#    #+#             */
-/*   Updated: 2021/10/20 17:26:30 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/21 19:54:42 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_atoi(const char *str)
 			if (1 == minus)
 				return (-1);
 			else
-				return (0);
+				return (EXIT_SUCCESS);
 		}
 		str++;
 	}
