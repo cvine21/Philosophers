@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:52:20 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/21 21:04:14 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/28 19:51:06 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	check_if_number(char **argv)
 	{
 		if (ft_isnumber(argv[i]))
 		{
-			printf("Error\nThe argument \"%s\" is not a number\n", argv[i]);
+			printf(RED"Error\nThe argument \"%s\" is not a number\n"COLOR_RESET,
+			argv[i]);
 			return (EXIT_FAILURE);
 		}
 	}
@@ -31,11 +32,12 @@ int	check_if_number(char **argv)
 int	is_valid_argv(int index, int int_argv)
 {
 	if (index == 0 && int_argv < 2)
-		printf("Error\nThere must be at least 2 philosophers\n");
+		printf(RED"Error\nThere must be at least 2 philosophers\n"COLOR_RESET);
 	else if (index > 0 && index < 4 && int_argv < 0)
-		printf("Error\nThe time value cannot be negative\n");
+		printf(RED"Error\nThe time value cannot be negative\n"COLOR_RESET);
 	else if (index == 4 && int_argv < 0)
-		printf("Error\nEach philosopher must eat times cannot be negative\n");
+		printf(RED"Error\nEach philosopher must eat times cannot be negative\n"
+		COLOR_RESET);
 	else
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
