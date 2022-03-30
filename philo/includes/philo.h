@@ -36,8 +36,7 @@ typedef enum e_lifecycle
 	take_forks,
 	eating,
 	sleeping,
-	thinking,
-	die
+	thinking
 }	t_lifecycle;
 
 typedef struct s_param
