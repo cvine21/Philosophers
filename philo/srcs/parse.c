@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:52:20 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/28 19:51:06 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/31 20:10:42 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_if_number(char **argv)
 		if (ft_isnumber(argv[i]))
 		{
 			printf(RED"Error\nThe argument \"%s\" is not a number\n"COLOR_RESET,
-			argv[i]);
+				argv[i]);
 			return (EXIT_FAILURE);
 		}
 	}
@@ -37,7 +37,7 @@ int	is_valid_argv(int index, int int_argv)
 		printf(RED"Error\nThe time value cannot be negative\n"COLOR_RESET);
 	else if (index == 4 && int_argv < 0)
 		printf(RED"Error\nEach philosopher must eat times cannot be negative\n"
-		COLOR_RESET);
+			COLOR_RESET);
 	else
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
@@ -65,7 +65,7 @@ int	*cast_argv_to_int(int argc, char **argv)
 	return (int_argv);
 }
 
-int *parse(int argc, char **argv)
+int	*parse(int argc, char **argv)
 {
 	int		*int_argv;
 

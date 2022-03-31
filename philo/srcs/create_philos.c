@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 13:54:25 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/28 20:45:19 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/31 21:18:59 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*simulation(void *tid)
 
 	philo = ((t_philo *)tid);
 	if (philo->state == full)
-		ft_usleep(philo->param->time_to_eat/2);
+		ft_usleep(philo->param->time_to_eat / 2);
 	while (philo->num_of_meals != philo->param->each_philo_must_eat_times)
 	{
 		pthread_mutex_lock(philo->left_fork);
@@ -43,7 +43,8 @@ int	create_philo_threads(t_philo *philo, int num_of_philos)
 	if (!philo_thread)
 		return (EXIT_FAILURE);
 	while (++i < num_of_philos)
-		pthread_create(&philo_thread[i], NULL, &simulation, (void *)(philo + i));
+		pthread_create(&philo_thread[i],
+			NULL, &simulation, (void *)(philo + i));
 	i = -1;
 	while (++i < num_of_philos)
 		pthread_join(philo_thread[i], NULL);

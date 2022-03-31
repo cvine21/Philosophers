@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 18:55:32 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/28 15:59:44 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/31 21:19:33 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int main(int argc, char **argv)
 	philo = init(argc, int_argv);
 	if (!philo)
 		return (EXIT_FAILURE);
-	if (!create_philo_threads(philo, philo->param->num_of_philos))
+	if (create_philo_threads(philo, philo->param->num_of_philos))
 		return (EXIT_FAILURE);
+	printf(RED"Simulation stopped"COLOR_RESET);
 	return (EXIT_SUCCESS);
 }

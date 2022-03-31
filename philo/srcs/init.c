@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:27:02 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/30 20:12:11 by cvine            ###   ########.fr       */
+/*   Updated: 2022/03/31 20:49:01 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_philo	*init(int argc, int *int_argv)
 {
 	t_param			*param;
 	t_philo			*philo;
-	pthread_mutex_t *fork;
+	pthread_mutex_t	*fork;
 
 	param = init_struct_param(argc, int_argv);
 	if (!param)
