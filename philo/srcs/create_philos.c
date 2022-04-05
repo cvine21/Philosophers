@@ -6,11 +6,29 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 13:54:25 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/31 21:18:59 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/05 17:58:43 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	*check_someone_dead(void *tid)
+{
+	t_philo	*philo;
+	int		timestamp;
+
+	philo = ((t_philo *)tid);
+	while (1)
+	{
+		if (philo->param->death_flag)
+		{
+			timestamp = get_time() - philo->param->start_time;
+			print(philo, died, "died");
+			return(NULL);
+		}
+	}
+	return (NULL);
+}
 
 void	*simulation(void *tid)
 {
@@ -45,8 +63,18 @@ int	create_philo_threads(t_philo *philo, int num_of_philos)
 	while (++i < num_of_philos)
 		pthread_create(&philo_thread[i],
 			NULL, &simulation, (void *)(philo + i));
-	i = -1;
-	while (++i < num_of_philos)
-		pthread_join(philo_thread[i], NULL);
+	return (EXIT_SUCCESS);
+}
+
+int create_threads(t_philo *philo)
+{
+	pthread_t death;
+
+	if (pthread_create(&death, NULL, &check_someone_dead, (void *)philo))
+		return (EXIT_FAILURE);
+	if (create_philo_threads(philo, philo->param->num_of_philos))
+		return (EXIT_FAILURE);
+	if (pthread_join(death, NULL))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

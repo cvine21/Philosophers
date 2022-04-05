@@ -8,6 +8,7 @@ SRCS_PATH	= 	srcs/
 
 SRCS_LIST	=	main.c		parse.c				init.c\
 				time.c		create_philos.c		action.c\
+				print.c
 
 HEADER		=	$(addprefix $(HEADER_PATH), philo.h)
 

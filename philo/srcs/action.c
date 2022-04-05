@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:27:40 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/31 21:19:09 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/05 17:54:20 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ void	death_check(t_philo *philo, int timestamp)
 {
 	if ((timestamp - philo->last_meal_time) > philo->param->time_to_die
 		&& philo->state != eating)
-	{
-		printf(RED"%d %d died\n"COLOR_RESET, timestamp, philo->id);
-		exit(EXIT_FAILURE);
-	}
+		philo->param->death_flag = 1;
 }
 
 void	action(t_philo *philo, t_lifecycle action)
@@ -29,23 +26,20 @@ void	action(t_philo *philo, t_lifecycle action)
 	timestamp = get_time() - philo->param->start_time;
 	philo->state = action;
 	if (action == take_forks)
-	{
-		printf(GREEN"%d %d has taken a fork\n"COLOR_RESET, timestamp, philo->id);
-		printf(GREEN"%d %d has taken a fork\n"COLOR_RESET, timestamp, philo->id);
-	}
+		print(philo, action, "has taken a fork");
 	else if (action == eating)
 	{
 		philo->last_meal_time = get_time() - philo->param->start_time;
-		printf(YELLOW"%d %d is eating\n"COLOR_RESET, timestamp, philo->id);
+		print(philo, action, "is eating");
 		ft_usleep(philo->param->time_to_eat);
 		philo->num_of_meals++;
 	}
 	else if (action == sleeping)
 	{
-		printf(BLUE"%d %d is sleeping\n"COLOR_RESET, timestamp, philo->id);
+		print(philo, action, "is sleeping");
 		ft_usleep(philo->param->time_to_sleep);
 	}
 	else
-		printf(MAGENTA"%d %d is thinking\n"COLOR_RESET, timestamp, philo->id);
+		print(philo, action, "is thinking");
 	death_check(philo, timestamp);
 }

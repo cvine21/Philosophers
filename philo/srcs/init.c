@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:27:02 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/31 20:49:01 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/05 17:19:39 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_param	*init_struct_param(int argc, int *int_argv)
 		param->each_philo_must_eat_times = int_argv[4];
 	else
 		param->each_philo_must_eat_times = -1;
+	param->death_flag = 0;
+	pthread_mutex_init(&param->print, NULL);
 	return (param);
 }
 
@@ -55,7 +57,7 @@ t_philo	*init_struct_philo(t_param *param, pthread_mutex_t *fork)
 	return (philo);
 }
 
-t_philo	*init(int argc, int *int_argv)
+t_philo	*initialize(int argc, int *int_argv)
 {
 	t_param			*param;
 	t_philo			*philo;
