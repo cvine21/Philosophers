@@ -49,7 +49,7 @@ typedef struct s_param
 	int				time_to_sleep;
 	int				each_philo_must_eat;
 	int				death_flag;
-	pthread_mutex_t print;
+	pthread_mutex_t	print;
 }	t_param;
 
 typedef struct s_philo
