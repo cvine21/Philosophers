@@ -47,7 +47,7 @@ typedef struct s_param
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				each_philo_must_eat_times;
+	int				each_philo_must_eat;
 	int				death_flag;
 	pthread_mutex_t print;
 }	t_param;
@@ -55,22 +55,22 @@ typedef struct s_param
 typedef struct s_philo
 {
 	int				id;
-	t_lifecycle		state;
 	int				num_of_meals;
 	long			last_meal_time;
+	t_param			*param;
+	t_lifecycle		state;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	t_param			*param;
 }	t_philo;
 
-int		*parse(int argc, char **argv);
 long	get_time(void);
-void	ft_usleep(long millisec);
+void	ft_usleep(long millisec, t_philo *philo);
+void	print(int timestamp, t_philo *philo, t_lifecycle action);
 
+int		*parse(int argc, char **argv);
+void	*waiter_control(void *tid);
+void	*simulation(void *tid);
+int		create_threads(t_philo *philo, int num_of_philos);
 t_philo	*initialize(int argc, int *int_argv);
-int		create_philo_threads(t_philo *philo, int num_of_philos);
-int		create_threads(t_philo *philo);
 
-void	action(t_philo *philo, t_lifecycle action);
-void	print(t_philo *philo, t_lifecycle action, char *text);
 #endif

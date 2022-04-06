@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:27:02 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/05 17:19:39 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/06 16:41:32 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ t_param	*init_struct_param(int argc, int *int_argv)
 	param->time_to_eat = int_argv[2];
 	param->time_to_sleep = int_argv[3];
 	param->start_time = get_time();
-	if (argc == 6)
-		param->each_philo_must_eat_times = int_argv[4];
-	else
-		param->each_philo_must_eat_times = -1;
 	param->death_flag = 0;
+	if (argc == 6)
+		param->each_philo_must_eat = int_argv[4];
+	else
+		param->each_philo_must_eat = -1;
 	pthread_mutex_init(&param->print, NULL);
 	return (param);
 }
