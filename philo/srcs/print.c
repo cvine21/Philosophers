@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:36:29 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/06 16:19:41 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/06 19:50:48 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	print(int timestamp, t_philo *philo, t_lifecycle action)
 {
 	pthread_mutex_lock(&philo->param->print);
-	if (philo->param->death_flag)
+	if (philo->param->death_flag
+		|| philo->num_of_meals == philo->param->each_philo_must_eat)
 	{
 		pthread_mutex_unlock(&philo->param->print);
 		return ;

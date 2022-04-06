@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:52:20 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/31 20:10:42 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/06 19:30:21 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	check_if_number(char **argv)
 
 int	is_valid_argv(int index, int int_argv)
 {
-	if (index == 0 && int_argv < 2)
-		printf(RED"Error\nThere must be at least 2 philosophers\n"COLOR_RESET);
+	if (index == 0 && !int_argv)
+		printf(RED"Error\nThere must be at least 1 philosopher\n"COLOR_RESET);
 	else if (index > 0 && index < 4 && int_argv < 0)
 		printf(RED"Error\nThe time value cannot be negative\n"COLOR_RESET);
 	else if (index == 4 && int_argv < 0)

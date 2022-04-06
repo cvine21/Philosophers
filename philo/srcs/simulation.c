@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:27:40 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/06 16:51:28 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/06 20:24:12 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	*simulation(void *tid)
 
 	philo = ((t_philo *)tid);
 	if (philo->state == full)
-		ft_usleep(philo->param->time_to_eat / 2, philo);
+		ft_usleep(philo->param->time_to_eat, philo);
 	while (philo->num_of_meals != philo->param->each_philo_must_eat
-		&& !philo->param->death_flag)
+		&& !philo->param->death_flag && philo->param->num_of_philos != 1)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		pthread_mutex_lock(philo->right_fork);

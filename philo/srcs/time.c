@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:22:10 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/06 15:35:45 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/06 20:56:13 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_usleep(long millisec, t_philo *philo)
 	long	current_time;
 
 	current_time = get_time();
-	while (get_time() - current_time < millisec && !philo->param->death_flag)
-		usleep(100);
+	while (get_time() - current_time < millisec && !philo->param->death_flag
+			&& philo->num_of_meals != philo->param->each_philo_must_eat)
+		usleep(300);
 }
