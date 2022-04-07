@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:27:02 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/06 16:41:32 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/07 13:19:45 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_param	*init_struct_param(int argc, int *int_argv)
 	param = malloc(sizeof(t_param));
 	if (!param)
 		return (NULL);
+	param->int_argv = int_argv;
 	param->num_of_philos = int_argv[0];
 	param->time_to_die = int_argv[1];
 	param->time_to_eat = int_argv[2];
@@ -57,7 +58,7 @@ t_philo	*init_struct_philo(t_param *param, pthread_mutex_t *fork)
 	return (philo);
 }
 
-t_philo	*initialize(int argc, int *int_argv)
+void	*initialize(int argc, int *int_argv)
 {
 	t_param			*param;
 	t_philo			*philo;
@@ -65,12 +66,15 @@ t_philo	*initialize(int argc, int *int_argv)
 
 	param = init_struct_param(argc, int_argv);
 	if (!param)
-		return (NULL);
+		return (free_mem(NULL, NULL, NULL, int_argv));
 	fork = malloc(sizeof(pthread_mutex_t) * param->num_of_philos);
 	if (!fork)
-		return (NULL);
+		return (free_mem(NULL, param, NULL, int_argv));
 	philo = init_struct_philo(param, fork);
 	if (!philo)
-		return (NULL);
-	return (philo);
+		return (free_mem(NULL, param, fork, int_argv));
+	if (create_threads(philo, philo->param->num_of_philos))
+		return (free_mem(philo, param, fork, int_argv));
+	free_mem(philo, param, fork, int_argv);
+	return ((void *)EXIT_SUCCESS);
 }

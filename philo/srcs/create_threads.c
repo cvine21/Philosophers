@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 13:54:25 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/06 17:00:32 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/07 13:20:46 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	create_philo_threads(t_philo *philo, int num_of_philos, pthread_t *waiter)
 		if (pthread_join(philo_thread[i], NULL))
 			return (EXIT_FAILURE);
 	}
+	free(philo_thread);
 	return (EXIT_SUCCESS);
 }
 

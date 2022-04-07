@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:52:20 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/06 19:30:21 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/07 13:16:32 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ int	*parse(int argc, char **argv)
 	}
 	int_argv = cast_argv_to_int(argc, argv + 1);
 	if (!int_argv)
-		return (NULL);
+		return (free_mem(NULL, NULL, NULL, int_argv));
 	return (int_argv);
 }

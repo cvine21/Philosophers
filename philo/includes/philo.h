@@ -42,6 +42,7 @@ typedef enum e_lifecycle
 
 typedef struct s_param
 {
+	int				*int_argv;
 	long			start_time;
 	int				num_of_philos;
 	int				time_to_die;
@@ -63,14 +64,15 @@ typedef struct s_philo
 	pthread_mutex_t	*right_fork;
 }	t_philo;
 
-long	get_time(void);
-void	ft_usleep(long millisec, t_philo *philo);
-void	print(int timestamp, t_philo *philo, t_lifecycle action);
-
 int		*parse(int argc, char **argv);
 void	*waiter_control(void *tid);
 void	*simulation(void *tid);
 int		create_threads(t_philo *philo, int num_of_philos);
-t_philo	*initialize(int argc, int *int_argv);
+void	*initialize(int argc, int *int_argv);
 
+long	get_time(void);
+void	ft_usleep(long millisec, t_philo *philo);
+void	print(int timestamp, t_philo *philo, t_lifecycle action);
+void	*free_mem(t_philo *philo, t_param *param, pthread_mutex_t *fork,
+			int *int_argv);
 #endif
