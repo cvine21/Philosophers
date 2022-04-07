@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 13:54:25 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/07 13:20:46 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/07 14:37:58 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,16 @@ int	create_threads(t_philo *philo, int num_of_philos)
 	if (create_philo_threads(philo, philo->param->num_of_philos, &waiter))
 		return (EXIT_FAILURE);
 	while (i++ < num_of_philos)
-		pthread_mutex_destroy(philo->left_fork);
+	{
+		if (pthread_mutex_destroy(philo->left_fork))
+			return (EXIT_FAILURE);
+	}
 	while (i--)
-		pthread_mutex_destroy(philo->right_fork);
-	pthread_mutex_destroy(&philo->param->print);
+	{
+		if (pthread_mutex_destroy(philo->right_fork))
+			return (EXIT_FAILURE);
+	}
+	if (pthread_mutex_destroy(&philo->param->print))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

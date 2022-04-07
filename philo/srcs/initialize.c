@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:27:02 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/07 13:19:45 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/07 14:30:01 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ t_param	*init_struct_param(int argc, int *int_argv)
 	param->time_to_sleep = int_argv[3];
 	param->start_time = get_time();
 	param->death_flag = 0;
+	param->each_philo_must_eat = -1;
 	if (argc == 6)
 		param->each_philo_must_eat = int_argv[4];
-	else
-		param->each_philo_must_eat = -1;
 	pthread_mutex_init(&param->print, NULL);
 	return (param);
 }

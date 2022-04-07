@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:52:20 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/07 13:16:32 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/07 14:38:58 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,8 @@ int	is_valid_argv(int index, int int_argv)
 {
 	if (index == 0 && !int_argv)
 		printf(RED"Error\nThere must be at least 1 philosopher\n"COLOR_RESET);
-	else if (index > 0 && index < 4 && int_argv < 0)
-		printf(RED"Error\nThe time value cannot be negative\n"COLOR_RESET);
-	else if (index == 4 && int_argv < 0)
-		printf(RED"Error\nEach philosopher must eat times cannot be negative\n"
-			COLOR_RESET);
+	else if (index > 0 && index < 5 && int_argv < 0)
+		printf(RED"Error\nThe argument cannot be negative\n"COLOR_RESET);
 	else
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
@@ -71,7 +68,7 @@ int	*parse(int argc, char **argv)
 
 	if (argc < 5 | argc > 6)
 	{
-		printf("Invalid number of arguments, must be 5 or 6(optional).\n");
+		printf("Invalid number of arguments.\n");
 		return (NULL);
 	}
 	int_argv = cast_argv_to_int(argc, argv + 1);
