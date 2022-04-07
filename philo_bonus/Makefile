@@ -1,16 +1,18 @@
-NAME		=	philo
+NAME		=	philo_bonus
 
-HEADER_NAME =	philo.h
+HEADER_NAME =	philo_bonus.h
 
-HEADER_PATH	=	includes/
+HEADER_PATH	=	includes_bonus/
 
 LIBFT		=	../libft/
 
-SRCS_PATH	= 	srcs/
+LIB_HEADER	=	../libft/includes/
 
-SRCS_LIST	=	main.c			parser.c	initialize.c\
-				print.c			utils.c		create_threads.c\
-				simulation.c
+SRCS_PATH	= 	srcs_bonus/
+
+SRCS_LIST	=	main_bonus.c		parser_bonus.c	initialize_bonus.c\
+				print_bonus.c		utils_bonus.c	create_threads_bonus.c\
+				simulation_bonus.c
 
 HEADER		=	$(addprefix $(HEADER_PATH), $(HEADER_NAME))
 
@@ -20,7 +22,7 @@ OBJS		=	$(patsubst %.c, %.o, $(SRCS))
 
 CC			=	gcc
 
-INCLUDES	=	-I$(HEADER_PATH) -I$(LIBFT)$(HEADER_PATH)
+INCLUDES	=	-I$(HEADER_PATH) -I$(LIB_HEADER)
 
 CFLAGS		=	-Wall -Wextra -Werror $(INCLUDES)
 
