@@ -6,13 +6,13 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:52:20 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/07 15:57:42 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/10 17:07:31 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	check_if_number(char **argv)
+void	check_if_number(char **argv)
 {
 	int	i;
 
@@ -23,56 +23,55 @@ int	check_if_number(char **argv)
 		{
 			printf(RED"Error\nThe argument \"%s\" is not a number\n"COLOR_RESET,
 				argv[i]);
-			return (EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		}
 	}
-	return (EXIT_SUCCESS);
 }
 
-int	is_valid_argv(int index, int int_argv)
+int	is_valid_argv(int index, int param)
 {
-	if (index == 0 && !int_argv)
+	if (index == 0 && !param)
 		printf(RED"Error\nThere must be at least 1 philosopher\n"COLOR_RESET);
-	else if (index > 0 && index < 5 && int_argv < 0)
+	else if (index > 0 && index < 5 && param < 0)
 		printf(RED"Error\nThe argument cannot be negative\n"COLOR_RESET);
 	else
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
 }
 
-int	*cast_argv_to_int(int argc, char **argv)
+int	*atoi_array(int argc, char **argv)
 {
 	int	i;
-	int	*int_argv;
+	int	*param;
 
 	i = 0;
-	if (check_if_number(argv))
+	check_if_number(argv);
+	param = malloc(sizeof(int) * ARGNUM);
+	if (!param)
 		return (NULL);
-	int_argv = malloc(sizeof(int) * (argc - 1));
-	if (!int_argv)
-		return (NULL);
-	while (*argv)
+	while (argv[i])
 	{
-		int_argv[i] = ft_atoi(*argv);
-		if (is_valid_argv(i, int_argv[i]))
+		param[i] = ft_atoi(argv[i]);
+		if (is_valid_argv(i, param[i]))
 			return (NULL);
-		argv++;
 		i++;
 	}
-	return (int_argv);
+	if (argc == 5)
+		param[num_of_eating] = -1;
+	return (param);
 }
 
 int	*parse(int argc, char **argv)
 {
-	int		*int_argv;
+	int		*param;
 
 	if (argc < 5 | argc > 6)
 	{
 		printf("Invalid number of arguments.\n");
-		return (NULL);
+		exit(EXIT_FAILURE);
 	}
-	int_argv = cast_argv_to_int(argc, argv + 1);
-	if (!int_argv)
-		return (free_mem(NULL, NULL, NULL, int_argv));
-	return (int_argv);
+	param = atoi_array(argc, argv + 1);
+	if (!param)
+		exit(EXIT_FAILURE);
+	return (param);
 }

@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:50:50 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/07 13:29:09 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/10 10:45:58 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	ft_usleep(long millisec, t_philo *philo)
 }
 
 void	*free_mem(t_philo *philo, t_param *param, pthread_mutex_t *fork,
-			int *int_argv)
+			int *argv_int)
 {
-	free(int_argv);
+	free(argv_int);
 	free(param);
 	free(fork);
 	free(philo);

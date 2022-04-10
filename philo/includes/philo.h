@@ -33,7 +33,7 @@ typedef enum e_lifecycle
 {
 	hungry,
 	full,
-	take_forks,
+	take_forkss,
 	eating,
 	sleeping,
 	thinking,
@@ -42,7 +42,7 @@ typedef enum e_lifecycle
 
 typedef struct s_param
 {
-	int				*int_argv;
+	int				*argv_int;
 	long			start_time;
 	int				num_of_philos;
 	int				time_to_die;
@@ -58,21 +58,21 @@ typedef struct s_philo
 	int				id;
 	int				num_of_meals;
 	long			last_meal_time;
-	t_param			*param;
 	t_lifecycle		state;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
+	t_param			*param;
 }	t_philo;
 
 int		*parse(int argc, char **argv);
 void	*waiter_control(void *tid);
 void	*simulation(void *tid);
 int		create_threads(t_philo *philo, int num_of_philos);
-void	*initialize(int argc, int *int_argv);
+void	*initialize(int argc, int *argv_int);
 
 long	get_time(void);
 void	ft_usleep(long millisec, t_philo *philo);
 void	print(int timestamp, t_philo *philo, t_lifecycle action);
 void	*free_mem(t_philo *philo, t_param *param, pthread_mutex_t *fork,
-			int *int_argv);
+			int *argv_int);
 #endif

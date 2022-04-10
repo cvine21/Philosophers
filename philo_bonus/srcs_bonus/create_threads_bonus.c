@@ -6,57 +6,85 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 13:54:25 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/07 15:57:36 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/10 20:33:02 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	create_philo_threads(t_philo *philo, int num_of_philos, pthread_t *waiter)
-{
-	int			i;
-	pthread_t	*philo_thread;
+// void	*meal_control(void *tid)
+// {
+// 	t_philo	*philo;
 
-	i = -1;
-	philo_thread = malloc(sizeof(pthread_t) * num_of_philos);
-	if (!philo_thread)
-		return (EXIT_FAILURE);
-	while (++i < num_of_philos)
-		if (pthread_create(
-				&philo_thread[i], NULL, &simulation, (void *)(philo + i)))
-			return (EXIT_FAILURE);
-	if (pthread_join(*waiter, NULL))
-		return (EXIT_FAILURE);
-	while (i--)
+// 	philo = ((t_philo *)tid);
+// 	while (1)
+// 	{
+// 		if (philo->num_of_meals == )
+// 	}
+// 	return (NULL);
+// }
+
+void	*death_control(void *tid)
+{
+	t_philo	*philo;
+	int		timestamp;
+
+	philo = ((t_philo *)tid);
+	while (1)
 	{
-		if (pthread_join(philo_thread[i], NULL))
-			return (EXIT_FAILURE);
+		timestamp = get_time() - philo->start_time;
+		if ((timestamp - philo->last_meal_time) > philo->param[time_to_die])
+		{
+			print(timestamp, philo, died);
+			sem_post(philo->stop_simul);
+			return (NULL); 
+		}
 	}
-	free(philo_thread);
-	return (EXIT_SUCCESS);
+	return (NULL);
 }
 
-int	create_threads(t_philo *philo, int num_of_philos)
+void	create_threads(t_philo *philo)
 {
-	int			i;
-	pthread_t	waiter;
+	pthread_t	death;
+	// pthread_t	meal;
+
+	if (pthread_create(&death, NULL, &death_control, (void *)philo))
+	{
+		sem_post(philo->stop_simul);
+		exit(EXIT_FAILURE);
+	}
+	if (pthread_detach(death))
+	{
+		sem_post(philo->stop_simul);
+		exit(EXIT_FAILURE);
+	}
+	// if (pthread_create(&meal, NULL, &meal_control, (void *)philo))
+	// 	return (EXIT_FAILURE);
+	// if (pthread_detach(death))
+	// 	return (EXIT_FAILURE);
+}
+
+int	create_philo_processes(int *param)
+{
+	int		i;
+	pid_t	*pid;
+	t_philo	*philo;
 
 	i = 0;
-	if (pthread_create(&waiter, NULL, &waiter_control, (void *)philo))
+	philo = init_philo(param);
+	pid = malloc(sizeof(pid_t) * param[num_of_philo]);
+	if (!pid)
 		return (EXIT_FAILURE);
-	if (create_philo_threads(philo, philo->param->num_of_philos, &waiter))
-		return (EXIT_FAILURE);
-	while (i++ < num_of_philos)
+	while(i < param[num_of_philo])
 	{
-		if (pthread_mutex_destroy(philo->left_fork))
+		pid[i] = fork();
+		if (pid[i] == -1)
 			return (EXIT_FAILURE);
+		else if (!pid[i])
+			simulation(philo, i + 1);
+		i++;
 	}
-	while (i--)
-	{
-		if (pthread_mutex_destroy(philo->right_fork))
-			return (EXIT_FAILURE);
-	}
-	if (pthread_mutex_destroy(&philo->param->print))
-		return (EXIT_FAILURE);
+	sem_wait(philo->stop_simul);
+	terminate(philo, param, pid);
 	return (EXIT_SUCCESS);
 }

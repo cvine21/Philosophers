@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 18:55:32 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/07 13:22:57 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/10 10:45:58 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	int		*int_argv;
+	int		*argv_int;
 
-	int_argv = parse(argc, argv);
-	if (!int_argv)
+	argv_int = parse(argc, argv);
+	if (!argv_int)
 		return (EXIT_FAILURE);
-	if (!initialize(argc, int_argv))
+	if (!initialize(argc, argv_int))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

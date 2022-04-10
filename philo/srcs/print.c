@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:36:29 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/07 14:54:28 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/10 19:38:34 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print(int timestamp, t_philo *philo, t_lifecycle action)
 		pthread_mutex_unlock(&philo->param->print);
 		return ;
 	}
-	else if (action == take_forks)
+	else if (action == take_forkss)
 	{
 		printf(GREEN"%d %d has taken a fork\n"COLOR_RESET, timestamp, philo->id);
 		printf(GREEN"%d %d has taken a fork\n"COLOR_RESET, timestamp, philo->id);

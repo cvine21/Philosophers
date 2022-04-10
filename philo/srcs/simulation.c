@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:27:40 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/06 20:24:12 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/10 19:38:34 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	*simulation(void *tid)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		pthread_mutex_lock(philo->right_fork);
-		action(philo, take_forks);
+		action(philo, take_forkss);
 		action(philo, eating);
 		pthread_mutex_unlock(philo->left_fork);
 		pthread_mutex_unlock(philo->right_fork);

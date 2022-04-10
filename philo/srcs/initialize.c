@@ -6,34 +6,34 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:27:02 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/07 14:30:01 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/10 10:45:58 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_param	*init_struct_param(int argc, int *int_argv)
+t_param	*init_param(int argc, int *argv_int)
 {
 	t_param	*param;
 
 	param = malloc(sizeof(t_param));
 	if (!param)
 		return (NULL);
-	param->int_argv = int_argv;
-	param->num_of_philos = int_argv[0];
-	param->time_to_die = int_argv[1];
-	param->time_to_eat = int_argv[2];
-	param->time_to_sleep = int_argv[3];
+	param->argv_int = argv_int;
+	param->num_of_philos = argv_int[0];
+	param->time_to_die = argv_int[1];
+	param->time_to_eat = argv_int[2];
+	param->time_to_sleep = argv_int[3];
 	param->start_time = get_time();
 	param->death_flag = 0;
 	param->each_philo_must_eat = -1;
 	if (argc == 6)
-		param->each_philo_must_eat = int_argv[4];
+		param->each_philo_must_eat = argv_int[4];
 	pthread_mutex_init(&param->print, NULL);
 	return (param);
 }
 
-t_philo	*init_struct_philo(t_param *param, pthread_mutex_t *fork)
+t_philo	*init_philo(t_param *param, pthread_mutex_t *fork)
 {
 	int		i;
 	t_philo	*philo;
@@ -57,23 +57,23 @@ t_philo	*init_struct_philo(t_param *param, pthread_mutex_t *fork)
 	return (philo);
 }
 
-void	*initialize(int argc, int *int_argv)
+void	*initialize(int argc, int *argv_int)
 {
 	t_param			*param;
 	t_philo			*philo;
 	pthread_mutex_t	*fork;
 
-	param = init_struct_param(argc, int_argv);
+	param = init_param(argc, argv_int);
 	if (!param)
-		return (free_mem(NULL, NULL, NULL, int_argv));
+		return (free_mem(NULL, NULL, NULL, argv_int));
 	fork = malloc(sizeof(pthread_mutex_t) * param->num_of_philos);
 	if (!fork)
-		return (free_mem(NULL, param, NULL, int_argv));
-	philo = init_struct_philo(param, fork);
+		return (free_mem(NULL, param, NULL, argv_int));
+	philo = init_philo(param, fork);
 	if (!philo)
-		return (free_mem(NULL, param, fork, int_argv));
+		return (free_mem(NULL, param, fork, argv_int));
 	if (create_threads(philo, philo->param->num_of_philos))
-		return (free_mem(philo, param, fork, int_argv));
-	free_mem(philo, param, fork, int_argv);
+		return (free_mem(philo, param, fork, argv_int));
+	free_mem(philo, param, fork, argv_int);
 	return ((void *)EXIT_SUCCESS);
 }
