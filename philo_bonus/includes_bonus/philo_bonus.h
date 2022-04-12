@@ -30,14 +30,13 @@
 # define BLUE			"\x1b[34m"
 # define MAGENTA		"\x1b[35m"
 # define CYAN			"\x1b[36m"
-# define COLOR_RESET	"\x1b[0m"
+# define DISCOLOR	"\x1b[0m"
 
 # define ARGNUM			5
+# define DEFAULT		-1
 
 typedef enum e_lifecycle
 {
-	hungry,
-	full,
 	take_forks,
 	eating,
 	sleeping,
@@ -64,22 +63,18 @@ typedef struct s_philo
 	t_lifecycle	state;
 	sem_t		*forks;
 	sem_t		*print;
-	sem_t		*everyone_full;
+	sem_t		*meal;
 	sem_t		*stop;
 }	t_philo;
 
 int		*parse(int argc, char **argv);
-void	*death_control(void *tid);
 void	simulation(t_philo	*philo, int id);
-void	create_threads(t_philo *philo);
-void	initialize(int argc, int *param);
+int		create_processes(t_philo *philo, int *param);
+t_philo	*init_philo(int *param);
 
 long	get_time(void);
 void	ft_usleep(long millisec);
-void	print(int timestamp, t_philo *philo, t_lifecycle action);
+void	print(t_philo *philo, t_lifecycle action);
 void	terminate(t_philo *philo, int *param, pid_t *pid);
 
-t_philo	*init_philo(int *param);
-int		create_philo_processes(int *param);
-void	*death_control(void *tid);
 #endif

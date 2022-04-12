@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:36:29 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/10 19:38:34 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/12 20:53:14 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ void	print(int timestamp, t_philo *philo, t_lifecycle action)
 	}
 	else if (action == take_forkss)
 	{
-		printf(GREEN"%d %d has taken a fork\n"COLOR_RESET, timestamp, philo->id);
-		printf(GREEN"%d %d has taken a fork\n"COLOR_RESET, timestamp, philo->id);
+		printf(GREEN"%d %d has taken a fork\n"DISCOLOR, timestamp, philo->id);
+		printf(GREEN"%d %d has taken a fork\n"DISCOLOR, timestamp, philo->id);
 	}
 	else if (action == eating)
-		printf(YELLOW"%d %d is eating\n"COLOR_RESET, timestamp, philo->id);
+		printf(YELLOW"%d %d is eating\n"DISCOLOR, timestamp, philo->id);
 	else if (action == sleeping)
-		printf(BLUE"%d %d is sleeping\n"COLOR_RESET, timestamp, philo->id);
+		printf(BLUE"%d %d is sleeping\n"DISCOLOR, timestamp, philo->id);
 	else if (action == thinking)
-		printf(MAGENTA"%d %d is thinking\n"COLOR_RESET, timestamp, philo->id);
+		printf(MAGENTA"%d %d is thinking\n"DISCOLOR, timestamp, philo->id);
 	else if (action == died)
 	{
-		printf(RED"%d %d died\n"COLOR_RESET, timestamp, philo->id);
+		printf(RED"%d %d died\n"DISCOLOR, timestamp, philo->id);
 		philo->param->death_flag = 1;
 	}
 	pthread_mutex_unlock(&philo->param->print);

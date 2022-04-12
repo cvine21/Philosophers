@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:52:20 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/10 17:07:31 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/12 20:53:14 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_if_number(char **argv)
 	{
 		if (ft_isnumber(argv[i]))
 		{
-			printf(RED"Error\nThe argument \"%s\" is not a number\n"COLOR_RESET,
+			printf(RED"Error\nThe argument \"%s\" is not a number\n"DISCOLOR,
 				argv[i]);
 			exit(EXIT_FAILURE);
 		}
@@ -31,9 +31,9 @@ void	check_if_number(char **argv)
 int	is_valid_argv(int index, int param)
 {
 	if (index == 0 && !param)
-		printf(RED"Error\nThere must be at least 1 philosopher\n"COLOR_RESET);
+		printf(RED"Error\nThere must be at least 1 philosopher\n"DISCOLOR);
 	else if (index > 0 && index < 5 && param < 0)
-		printf(RED"Error\nThe argument cannot be negative\n"COLOR_RESET);
+		printf(RED"Error\nThe argument cannot be negative\n"DISCOLOR);
 	else
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
@@ -57,7 +57,7 @@ int	*atoi_array(int argc, char **argv)
 		i++;
 	}
 	if (argc == 5)
-		param[num_of_eating] = -1;
+		param[num_of_eating] = DEFAULT;
 	return (param);
 }
 
