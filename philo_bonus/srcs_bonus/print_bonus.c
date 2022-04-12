@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:36:29 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/10 20:09:36 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/11 17:36:12 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ void	print(int timestamp, t_philo *philo, t_lifecycle action)
 	else if (action == thinking)
 		printf(MAGENTA"%d %d is thinking\n"COLOR_RESET, timestamp, philo->id);
 	else if (action == died)
-	{
 		printf(RED"%d %d died\n"COLOR_RESET, timestamp, philo->id);
-		return ;
-	}
-	sem_post(philo->print);
+	if (action != died)
+		sem_post(philo->print);
 }

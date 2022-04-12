@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:50:50 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/10 18:15:20 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/12 11:20:38 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	terminate(t_philo *philo, int *param, pid_t *pid)
 	sem_close(philo->forks);
 	sem_close(philo->print);
 	sem_close(philo->everyone_full);
-	sem_close(philo->stop_simul);
+	sem_close(philo->stop);
 	while (i < philo->param[num_of_philo])
-		kill(pid[i++], SIGTERM);
+		kill(pid[i++], SIGKILL);
+	free(pid);
 }

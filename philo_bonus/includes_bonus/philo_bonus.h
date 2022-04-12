@@ -65,7 +65,7 @@ typedef struct s_philo
 	sem_t		*forks;
 	sem_t		*print;
 	sem_t		*everyone_full;
-	sem_t		*stop_simul;
+	sem_t		*stop;
 }	t_philo;
 
 int		*parse(int argc, char **argv);
