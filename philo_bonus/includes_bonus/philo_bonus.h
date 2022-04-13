@@ -13,7 +13,6 @@
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 
-# include "libft.h"
 # include <pthread.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -60,7 +59,6 @@ typedef struct s_philo
 	long		last_meal_time;
 	long		start_time;
 	int			*param;
-	t_lifecycle	state;
 	sem_t		*forks;
 	sem_t		*print;
 	sem_t		*meal;
@@ -71,10 +69,16 @@ int		*parse(int argc, char **argv);
 void	simulation(t_philo	*philo, int id);
 int		create_processes(t_philo *philo, int *param);
 t_philo	*init_philo(int *param);
+void	*meal_counter(void *tid);
+void	*death_control(void *tid);
+void	create_death_thread(t_philo *philo);
+void	create_thread(t_philo *philo, pthread_t	*thread, void *routine(void *));
 
 long	get_time(void);
 void	ft_usleep(long millisec);
 void	print(t_philo *philo, t_lifecycle action);
 void	terminate(t_philo *philo, int *param, pid_t *pid);
+int		ft_isnumber(char *str);
+int		ft_atoi(const char *str);
 
 #endif

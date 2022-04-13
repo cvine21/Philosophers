@@ -10,9 +10,9 @@ LIB_HEADER	=	../libft/includes/
 
 SRCS_PATH	= 	srcs_bonus/
 
-SRCS_LIST	=	main_bonus.c		parser_bonus.c	initialize_bonus.c\
-				print_bonus.c		utils_bonus.c	create_threads_bonus.c\
-				simulation_bonus.c
+SRCS_LIST	=	main.c		parser.c	initialize.c\
+				print.c		utils.c	create_process.c\
+				threads.c	simulation.c
 
 HEADER		=	$(addprefix $(HEADER_PATH), $(HEADER_NAME))
 

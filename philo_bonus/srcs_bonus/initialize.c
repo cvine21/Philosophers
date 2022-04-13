@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:27:02 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/12 21:41:21 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/13 19:37:04 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_philo	*init_philo(int *param)
 	philo = malloc(sizeof(t_philo));
 	if (!philo)
 		exit(EXIT_FAILURE);
+	philo->id = DEFAULT;
 	philo->num_of_meals = 0;
 	philo->last_meal_time = 0;
 	philo->start_time = get_time();

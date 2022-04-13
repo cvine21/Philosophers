@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:50:50 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/12 20:53:38 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/13 20:35:59 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,47 @@ void	terminate(t_philo *philo, int *param, pid_t *pid)
 	while (i < philo->param[num_of_philo])
 		kill(pid[i++], SIGKILL);
 	free(pid);
+}
+
+int	ft_isnumber(char *str)
+{
+	if (!str)
+		return (1);
+	if (*str == '-')
+		str++;
+	while (*str)
+	{
+		if (*str < 48|| *str > 57)
+			return (1);
+		str++;
+	}
+	return (0);
+}
+
+int	ft_atoi(const char *str)
+{
+	long int	rep;
+	int			minus;
+
+	rep = 0;
+	minus = 1;
+	while ((9 <= *str && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '-')
+		minus = -1;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (48 <= *str && *str <= 57)
+	{
+		rep = rep * 10 + (*str - 48);
+		if (rep < 0)
+		{
+			if (1 == minus)
+				return (-1);
+			else
+				return (0);
+		}
+		str++;
+	}
+	return (rep * minus);
 }

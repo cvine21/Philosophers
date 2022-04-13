@@ -13,7 +13,6 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-# include "libft.h"
 # include <pthread.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -75,4 +74,6 @@ void	ft_usleep(long millisec, t_philo *philo);
 void	print(int timestamp, t_philo *philo, t_lifecycle action);
 void	*free_mem(t_philo *philo, t_param *param, pthread_mutex_t *fork,
 			int *argv_int);
+int		ft_isnumber(char *str);
+int		ft_atoi(const char *str);
 #endif
