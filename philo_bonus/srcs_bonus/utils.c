@@ -6,13 +6,13 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:50:50 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/13 20:35:59 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/14 12:52:20 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-long	get_time(void)
+long	current_time(void)
 {
 	struct timeval	current_time;
 	long			millisec_time;
@@ -24,10 +24,10 @@ long	get_time(void)
 
 void	ft_usleep(long millisec)
 {
-	long	current_time;
+	long	sleep_start_time;
 
-	current_time = get_time();
-	while (get_time() - current_time < millisec)
+	sleep_start_time = current_time();
+	while (current_time() - sleep_start_time < millisec)
 		usleep(300);
 }
 
@@ -36,12 +36,11 @@ void	terminate(t_philo *philo, int *param, pid_t *pid)
 	int	i;
 
 	i = 0;
-	free(param);
-	free(philo);
 	sem_close(philo->forks);
 	sem_close(philo->print);
-	sem_close(philo->meal);
 	sem_close(philo->stop);
+	free(param);
+	free(philo);
 	while (i < philo->param[num_of_philo])
 		kill(pid[i++], SIGKILL);
 	free(pid);
@@ -55,7 +54,7 @@ int	ft_isnumber(char *str)
 		str++;
 	while (*str)
 	{
-		if (*str < 48|| *str > 57)
+		if (*str < 48 || *str > 57)
 			return (1);
 		str++;
 	}

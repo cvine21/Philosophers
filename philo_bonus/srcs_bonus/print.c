@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_bonus.c                                      :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:36:29 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/12 20:53:14 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/14 12:47:10 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print(t_philo *philo, t_lifecycle action)
 {
 	long	timestamp;
 
-	timestamp = get_time() - philo->start_time;
+	timestamp = current_time() - philo->start_time;
 	sem_wait(philo->print);
 	if (action == take_forks)
 	{

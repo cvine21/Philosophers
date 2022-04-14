@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_death_thread_bonus.c                             :+:      :+:    :+:   */
+/*   create_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 13:54:25 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/13 19:51:01 by cvine            ###   ########.fr       */
+/*   Created: 2022/04/14 12:38:41 by cvine             #+#    #+#             */
+/*   Updated: 2022/04/14 12:38:43 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ int	create_processes(t_philo *philo, int *param)
 {
 	int			i;
 	pid_t		*pid;
-	pthread_t	meal;
 
 	i = 0;
-	create_thread(philo, &meal, meal_counter);
 	pid = malloc(sizeof(pid_t) * param[num_of_philo]);
 	if (!pid)
 		return (EXIT_FAILURE);
@@ -32,7 +30,9 @@ int	create_processes(t_philo *philo, int *param)
 			simulation(philo, i + 1);
 		i++;
 	}
-	sem_wait(philo->stop);
+	i = 0;
+	while (i++ < param[num_of_philo])
+		sem_wait(philo->stop);
 	terminate(philo, param, pid);
 	return (EXIT_SUCCESS);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize_bonus.c                                 :+:      :+:    :+:   */
+/*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:27:02 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/13 19:37:04 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/14 12:47:10 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,12 @@ t_philo	*init_philo(int *param)
 	philo = malloc(sizeof(t_philo));
 	if (!philo)
 		exit(EXIT_FAILURE);
-	philo->id = DEFAULT;
 	philo->num_of_meals = 0;
-	philo->last_meal_time = 0;
-	philo->start_time = get_time();
+	philo->last_meal_time = current_time();
+	philo->start_time = current_time();
 	philo->param = param;
 	philo->forks = init_sem("/forks", param[num_of_philo]);
 	philo->print = init_sem("/print", 1);
-	philo->meal = init_sem("/meal", 0);
 	philo->stop = init_sem("/stop", 0);
 	return (philo);
 }

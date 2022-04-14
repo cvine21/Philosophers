@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_bonus.c                                     :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:52:20 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/12 20:53:14 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/14 11:07:26 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	check_if_number(char **argv)
 	int	i;
 
 	i = 0;
-	while (argv[++i])
+	while (argv[i])
 	{
 		if (ft_isnumber(argv[i]))
 		{
@@ -25,6 +25,7 @@ void	check_if_number(char **argv)
 				argv[i]);
 			exit(EXIT_FAILURE);
 		}
+		i++;
 	}
 }
 
@@ -32,7 +33,7 @@ int	is_valid_argv(int index, int param)
 {
 	if (index == 0 && !param)
 		printf(RED"Error\nThere must be at least 1 philosopher\n"DISCOLOR);
-	else if (index > 0 && index < 5 && param < 0)
+	else if (index >= 0 && index < 5 && param < 0)
 		printf(RED"Error\nThe argument cannot be negative\n"DISCOLOR);
 	else
 		return (EXIT_SUCCESS);

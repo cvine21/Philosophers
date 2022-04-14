@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                     :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 18:25:06 by cvine             #+#    #+#             */
-/*   Updated: 2022/03/12 18:26:18 by cvine            ###   ########.fr       */
+/*   Created: 2022/04/14 12:56:47 by cvine             #+#    #+#             */
+/*   Updated: 2022/04/14 12:57:28 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@
 # include <semaphore.h>
 # include <signal.h>
 
-# define RED			"\x1b[31m"
-# define GREEN			"\x1b[32m"
-# define YELLOW			"\x1b[33m"
-# define BLUE			"\x1b[34m"
-# define MAGENTA		"\x1b[35m"
-# define CYAN			"\x1b[36m"
+# define RED		"\x1b[31m"
+# define GREEN		"\x1b[32m"
+# define YELLOW		"\x1b[33m"
+# define BLUE		"\x1b[34m"
+# define MAGENTA	"\x1b[35m"
+# define CYAN		"\x1b[36m"
 # define DISCOLOR	"\x1b[0m"
 
-# define ARGNUM			5
-# define DEFAULT		-1
+# define ARGNUM		5
+# define DEFAULT	-1
 
 typedef enum e_lifecycle
 {
@@ -61,20 +61,16 @@ typedef struct s_philo
 	int			*param;
 	sem_t		*forks;
 	sem_t		*print;
-	sem_t		*meal;
 	sem_t		*stop;
 }	t_philo;
 
 int		*parse(int argc, char **argv);
 void	simulation(t_philo	*philo, int id);
 int		create_processes(t_philo *philo, int *param);
+void	create_waiter_thread(t_philo *philo);
 t_philo	*init_philo(int *param);
-void	*meal_counter(void *tid);
-void	*death_control(void *tid);
-void	create_death_thread(t_philo *philo);
-void	create_thread(t_philo *philo, pthread_t	*thread, void *routine(void *));
 
-long	get_time(void);
+long	current_time(void);
 void	ft_usleep(long millisec);
 void	print(t_philo *philo, t_lifecycle action);
 void	terminate(t_philo *philo, int *param, pid_t *pid);
