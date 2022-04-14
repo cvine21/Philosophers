@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 12:27:02 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/10 10:45:58 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/14 12:47:10 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_param	*init_param(int argc, int *argv_int)
 	param->time_to_die = argv_int[1];
 	param->time_to_eat = argv_int[2];
 	param->time_to_sleep = argv_int[3];
-	param->start_time = get_time();
+	param->start_time = current_time();
 	param->death_flag = 0;
 	param->each_philo_must_eat = -1;
 	if (argc == 6)

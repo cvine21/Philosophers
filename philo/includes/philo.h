@@ -69,7 +69,7 @@ void	*simulation(void *tid);
 int		create_threads(t_philo *philo, int num_of_philos);
 void	*initialize(int argc, int *argv_int);
 
-long	get_time(void);
+long	current_time(void);
 void	ft_usleep(long millisec, t_philo *philo);
 void	print(int timestamp, t_philo *philo, t_lifecycle action);
 void	*free_mem(t_philo *philo, t_param *param, pthread_mutex_t *fork,

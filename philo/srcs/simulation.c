@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:27:40 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/10 19:38:34 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/14 12:47:10 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*waiter_control(void *tid)
 	philo = ((t_philo *)tid);
 	while (philo->num_of_meals != philo->param->each_philo_must_eat)
 	{
-		timestamp = get_time() - philo->param->start_time;
+		timestamp = current_time() - philo->param->start_time;
 		if ((timestamp - philo->last_meal_time) > philo->param->time_to_die
 			&& philo->state != eating)
 		{
@@ -35,12 +35,12 @@ void	action(t_philo *philo, t_lifecycle action)
 {
 	int	timestamp;
 
-	timestamp = get_time() - philo->param->start_time;
+	timestamp = current_time() - philo->param->start_time;
 	philo->state = action;
 	print(timestamp, philo, action);
 	if (action == eating)
 	{
-		philo->last_meal_time = get_time() - philo->param->start_time;
+		philo->last_meal_time = current_time() - philo->param->start_time;
 		ft_usleep(philo->param->time_to_eat, philo);
 		philo->num_of_meals++;
 	}

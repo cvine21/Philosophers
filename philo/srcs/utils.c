@@ -6,13 +6,13 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:50:50 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/13 20:36:52 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/14 12:54:24 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	get_time(void)
+long	current_time(void)
 {
 	struct timeval	current_time;
 	long			millisec_time;
@@ -24,10 +24,11 @@ long	get_time(void)
 
 void	ft_usleep(long millisec, t_philo *philo)
 {
-	long	current_time;
+	long	sleep_start_time;
 
-	current_time = get_time();
-	while (get_time() - current_time < millisec && !philo->param->death_flag
+	sleep_start_time = current_time();
+	while (current_time() - sleep_start_time < millisec
+		&& !philo->param->death_flag
 		&& philo->num_of_meals != philo->param->each_philo_must_eat)
 		usleep(300);
 }
@@ -50,7 +51,7 @@ int	ft_isnumber(char *str)
 		str++;
 	while (*str)
 	{
-		if (*str < 48|| *str > 57)
+		if (*str < 48 || *str > 57)
 			return (1);
 		str++;
 	}
