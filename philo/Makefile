@@ -1,10 +1,8 @@
 NAME		=	philo
 
-HEADER_NAME =	philo.h
+HEADER_NAME	=	philo.h
 
 HEADER_PATH	=	includes/
-
-LIBFT		=	../libft/
 
 SRCS_PATH	= 	srcs/
 
@@ -20,29 +18,26 @@ OBJS		=	$(patsubst %.c, %.o, $(SRCS))
 
 CC			=	gcc
 
-INCLUDES	=	-I$(HEADER_PATH) -I$(LIBFT)$(HEADER_PATH)
+INCLUDES	=	-I$(HEADER_PATH)
 
 CFLAGS		=	-Wall -Wextra -Werror $(INCLUDES)
 
-LIB_FLAGS 	=	-L$(LIBFT) -lft -lpthread
+PTHREAD		=	-lpthread
 
 .PHONY		:	all clean fclean re
 
 all			:	$(NAME)
 
 $(NAME)		:	$(OBJS) $(HEADER)
-	$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) $(LIB_FLAGS) $(OBJS) -o $@
+	$(CC) $(CFLAGS) $(PTHREAD) $(OBJS) -o $@
 
 %.o			:	%.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean		:
-	$(MAKE) clean -C $(LIBFT)
 	$(RM) $(OBJS)
 
 fclean		:	clean
-	$(MAKE) fclean -C $(LIBFT)
 	$(RM) $(NAME)
 
 re			:	fclean all
