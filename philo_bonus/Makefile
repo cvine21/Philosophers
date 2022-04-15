@@ -6,9 +6,9 @@ HEADER_PATH	=	includes_bonus/
 
 SRCS_PATH	= 	srcs_bonus/
 
-SRCS_LIST	=	main.c		parser.c		initialize.c\
-				print.c		utils.c			create_process.c\
-				threads.c	simulation.c
+SRCS_LIST	=	main.c		initialize.c	simulation.c\
+				parser.c	create_philo.c	print.c\
+				waiter.c	utils.c
 
 HEADER		=	$(addprefix $(HEADER_PATH), $(HEADER_NAME))
 

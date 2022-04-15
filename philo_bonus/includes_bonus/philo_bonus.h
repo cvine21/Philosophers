@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 12:56:47 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/14 12:57:28 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:46:06 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define CYAN		"\x1b[36m"
 # define DISCOLOR	"\x1b[0m"
 
-# define ARGNUM		5
+# define MAXARGC	5
 # define DEFAULT	-1
 
 typedef enum e_lifecycle
@@ -49,25 +49,26 @@ typedef enum e_param
 	time_to_die,
 	time_to_eat,
 	time_to_sleep,
-	num_of_eating
+	num_of_meals
 }	t_param;
 
 typedef struct s_philo
 {
-	int			id;
-	int			num_of_meals;
-	long		last_meal_time;
-	long		start_time;
-	int			*param;
-	sem_t		*forks;
-	sem_t		*print;
-	sem_t		*stop;
+	int		id;
+	int		num_of_meals;
+	long	last_meal_time;
+	long	start_time;
+	int		*param;
+	sem_t	*start;
+	sem_t	*stop;
+	sem_t	*forks;
+	sem_t	*print;
 }	t_philo;
 
 int		*parse(int argc, char **argv);
-void	simulation(t_philo	*philo, int id);
-int		create_processes(t_philo *philo, int *param);
-void	create_waiter_thread(t_philo *philo);
+void	simulation(t_philo	*philo, int philo_id);
+void	create_philo(t_philo *philo, int *param);
+void	create_waiter(t_philo *philo);
 t_philo	*init_philo(int *param);
 
 long	current_time(void);

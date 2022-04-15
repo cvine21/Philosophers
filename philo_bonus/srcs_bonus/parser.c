@@ -6,13 +6,13 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 19:52:20 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/14 11:07:26 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:46:06 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	check_if_number(char **argv)
+int	check_if_number(char **argv)
 {
 	int	i;
 
@@ -21,12 +21,12 @@ void	check_if_number(char **argv)
 	{
 		if (ft_isnumber(argv[i]))
 		{
-			printf(RED"Error\nThe argument \"%s\" is not a number\n"DISCOLOR,
-				argv[i]);
-			exit(EXIT_FAILURE);
+			printf(RED"Error\n\"%s\" is not a number\n"DISCOLOR, argv[i]);
+			return (EXIT_FAILURE);
 		}
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
 
 int	is_valid_argv(int index, int param)
@@ -46,19 +46,20 @@ int	*atoi_array(int argc, char **argv)
 	int	*param;
 
 	i = 0;
-	check_if_number(argv);
-	param = malloc(sizeof(int) * ARGNUM);
+	if (check_if_number(argv))
+		return (NULL);
+	param = malloc(sizeof(int) * MAXARGC);
 	if (!param)
 		return (NULL);
 	while (argv[i])
 	{
 		param[i] = ft_atoi(argv[i]);
 		if (is_valid_argv(i, param[i]))
-			return (NULL);
+			exit(EXIT_FAILURE);
 		i++;
 	}
 	if (argc == 5)
-		param[num_of_eating] = DEFAULT;
+		param[num_of_meals] = DEFAULT;
 	return (param);
 }
 
@@ -69,10 +70,10 @@ int	*parse(int argc, char **argv)
 	if (argc < 5 | argc > 6)
 	{
 		printf("Invalid number of arguments.\n");
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
 	param = atoi_array(argc, argv + 1);
 	if (!param)
-		exit(EXIT_FAILURE);
+		return (NULL);
 	return (param);
 }

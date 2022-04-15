@@ -6,36 +6,36 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:36:29 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/12 20:53:14 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:46:06 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print(int timestamp, t_philo *philo, t_lifecycle action)
+void	print(t_philo *philo, t_lifecycle action)
 {
-	pthread_mutex_lock(&philo->param->print);
-	if (philo->param->death_flag
-		|| philo->num_of_meals == philo->param->each_philo_must_eat)
+	long	timestamp;
+
+	pthread_mutex_lock(philo->print);
+	timestamp = current_time() - philo->start_time;
+	if (*philo->alive_or_dead
+		|| philo->num_of_meals == philo->param[num_of_meals])
 	{
-		pthread_mutex_unlock(&philo->param->print);
+		pthread_mutex_unlock(philo->print);
 		return ;
 	}
-	else if (action == take_forkss)
+	else if (action == take_forks)
 	{
-		printf(GREEN"%d %d has taken a fork\n"DISCOLOR, timestamp, philo->id);
-		printf(GREEN"%d %d has taken a fork\n"DISCOLOR, timestamp, philo->id);
+		printf(GREEN"%ld %d has taken a fork\n"DISCOLOR, timestamp, philo->id);
+		printf(GREEN"%ld %d has taken a fork\n"DISCOLOR, timestamp, philo->id);
 	}
 	else if (action == eating)
-		printf(YELLOW"%d %d is eating\n"DISCOLOR, timestamp, philo->id);
+		printf(YELLOW"%ld %d is eating\n"DISCOLOR, timestamp, philo->id);
 	else if (action == sleeping)
-		printf(BLUE"%d %d is sleeping\n"DISCOLOR, timestamp, philo->id);
+		printf(BLUE"%ld %d is sleeping\n"DISCOLOR, timestamp, philo->id);
 	else if (action == thinking)
-		printf(MAGENTA"%d %d is thinking\n"DISCOLOR, timestamp, philo->id);
+		printf(MAGENTA"%ld %d is thinking\n"DISCOLOR, timestamp, philo->id);
 	else if (action == died)
-	{
-		printf(RED"%d %d died\n"DISCOLOR, timestamp, philo->id);
-		philo->param->death_flag = 1;
-	}
-	pthread_mutex_unlock(&philo->param->print);
+		printf(RED"%ld %d died\n"DISCOLOR, timestamp, philo->id);
+	pthread_mutex_unlock(philo->print);
 }

@@ -6,25 +6,23 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:27:40 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/14 12:47:10 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:46:06 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*waiter_control(void *tid)
+void	*waiter_routine(void *tid)
 {
 	t_philo	*philo;
-	int		timestamp;
 
 	philo = ((t_philo *)tid);
-	while (philo->num_of_meals != philo->param->each_philo_must_eat)
+	while (philo->num_of_meals != philo->param[num_of_meals])
 	{
-		timestamp = current_time() - philo->param->start_time;
-		if ((timestamp - philo->last_meal_time) > philo->param->time_to_die
-			&& philo->state != eating)
+		if (current_time() - philo->last_meal_time > philo->param[time_to_die])
 		{
-			print(timestamp, philo, died);
+			print(philo, died);
+			*philo->alive_or_dead = DEAD;
 			return (NULL);
 		}
 	}
@@ -35,17 +33,16 @@ void	action(t_philo *philo, t_lifecycle action)
 {
 	int	timestamp;
 
-	timestamp = current_time() - philo->param->start_time;
-	philo->state = action;
-	print(timestamp, philo, action);
+	timestamp = current_time() - philo->start_time;
+	print(philo, action);
 	if (action == eating)
 	{
-		philo->last_meal_time = current_time() - philo->param->start_time;
-		ft_usleep(philo->param->time_to_eat, philo);
+		philo->last_meal_time = current_time();
 		philo->num_of_meals++;
+		ft_usleep(philo->param[time_to_eat], philo);
 	}
 	else if (action == sleeping)
-		ft_usleep(philo->param->time_to_sleep, philo);
+		ft_usleep(philo->param[time_to_sleep], philo);
 }
 
 void	*simulation(void *tid)
@@ -53,14 +50,14 @@ void	*simulation(void *tid)
 	t_philo	*philo;
 
 	philo = ((t_philo *)tid);
-	if (philo->state == full)
-		ft_usleep(philo->param->time_to_eat, philo);
-	while (philo->num_of_meals != philo->param->each_philo_must_eat
-		&& !philo->param->death_flag && philo->param->num_of_philos != 1)
+	if (!(philo->id % 2))
+		ft_usleep(philo->param[time_to_eat], philo);
+	while (philo->num_of_meals != philo->param[num_of_meals]
+		&& !(*philo->alive_or_dead) && philo->param[num_of_philo] != 1)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		pthread_mutex_lock(philo->right_fork);
-		action(philo, take_forkss);
+		action(philo, take_forks);
 		action(philo, eating);
 		pthread_mutex_unlock(philo->left_fork);
 		pthread_mutex_unlock(philo->right_fork);

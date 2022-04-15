@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads.c                                          :+:      :+:    :+:   */
+/*   waiter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 19:52:41 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/14 12:48:10 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/15 14:11:19 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,22 @@ void	*waiter_routine(void *tid)
 	return (NULL);
 }
 
-void	create_waiter_thread(t_philo *philo)
+void	create_waiter(t_philo *philo)
 {
+	int			i;
 	pthread_t	death;
 
+	i = 0;
 	if (pthread_create(&death, NULL, &waiter_routine, (void *)philo))
+	{
+		while (i++ < philo->param[num_of_philo])
+			sem_post(philo->stop);
 		exit(EXIT_FAILURE);
+	}
 	if (pthread_detach(death))
+	{
+		while (i++ < philo->param[num_of_philo])
+			sem_post(philo->stop);
 		exit(EXIT_FAILURE);
+	}
 }

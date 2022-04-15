@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:27:40 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/14 12:47:10 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:46:06 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ void	action(t_philo *philo, t_lifecycle action)
 		ft_usleep(philo->param[time_to_sleep]);
 }
 
-void	simulation(t_philo	*philo, int id)
+void	simulation(t_philo	*philo, int philo_id)
 {
-	philo->id = id;
-	create_waiter_thread(philo);
-	if (!(id % 2))
+	create_waiter(philo);
+	sem_wait(philo->start);
+	philo->id = philo_id;
+	philo->start_time = current_time();
+	philo->last_meal_time = current_time();
+	if (!(philo_id % 2))
 		ft_usleep(philo->param[time_to_eat]);
-	while (philo->num_of_meals != philo->param[num_of_eating])
+	while (philo->num_of_meals != philo->param[num_of_meals])
 	{
 		sem_wait(philo->forks);
 		sem_wait(philo->forks);

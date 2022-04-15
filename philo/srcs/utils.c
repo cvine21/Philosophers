@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 11:50:50 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/14 12:54:24 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/15 16:46:06 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,13 @@ void	ft_usleep(long millisec, t_philo *philo)
 
 	sleep_start_time = current_time();
 	while (current_time() - sleep_start_time < millisec
-		&& !philo->param->death_flag
-		&& philo->num_of_meals != philo->param->each_philo_must_eat)
+		&& !(*philo->alive_or_dead)
+		&& philo->num_of_meals != philo->param[num_of_meals])
 		usleep(300);
 }
 
-void	*free_mem(t_philo *philo, t_param *param, pthread_mutex_t *fork,
-			int *argv_int)
+void	*free_mem(t_philo *philo, pthread_mutex_t *fork, int *param)
 {
-	free(argv_int);
 	free(param);
 	free(fork);
 	free(philo);

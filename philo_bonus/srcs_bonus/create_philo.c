@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_process.c                                   :+:      :+:    :+:   */
+/*   create_philo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 12:38:41 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/14 12:38:43 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/15 13:59:50 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	create_processes(t_philo *philo, int *param)
+void	create_philo(t_philo *philo, int *param)
 {
-	int			i;
-	pid_t		*pid;
+	int		i;
+	pid_t	*pid;
 
 	i = 0;
 	pid = malloc(sizeof(pid_t) * param[num_of_philo]);
 	if (!pid)
-		return (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	while (i < param[num_of_philo])
 	{
 		pid[i] = fork();
 		if (pid[i] == -1)
-			return (EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		else if (!pid[i])
+		{
 			simulation(philo, i + 1);
+			exit(EXIT_SUCCESS);
+		}
 		i++;
 	}
-	i = 0;
-	while (i++ < param[num_of_philo])
-		sem_wait(philo->stop);
+	while (i--)
+		sem_post(philo->start);
 	terminate(philo, param, pid);
-	return (EXIT_SUCCESS);
 }

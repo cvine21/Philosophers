@@ -6,7 +6,7 @@
 /*   By: cvine <cvine@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 18:55:32 by cvine             #+#    #+#             */
-/*   Updated: 2022/04/14 12:27:17 by cvine            ###   ########.fr       */
+/*   Updated: 2022/04/15 13:59:34 by cvine            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int	main(int argc, char **argv)
 	t_philo	*philo;
 
 	param = parse(argc, argv);
-	philo = init_philo(param);
-	if (!create_processes(philo, param))
+	if (!param)
 		return (EXIT_FAILURE);
+	philo = init_philo(param);
+	create_philo(philo, param);
 	return (EXIT_SUCCESS);
 }
