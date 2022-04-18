@@ -28,26 +28,26 @@ This project simulates **the dining philosophers problem** that states that N ph
 1. Clone this repo and go to the cloned directoty
 ``` sh
 https://github.com/cvine21/philosophers.git
+
 cd philosophers/
 ```
-2. Run Makefile for the mandatory part:
+2. Run the simulation for the mandatory part:
 ``` sh
 cd philo && make
+
+./philo [arg1] [arg2] [arg3] [arg4] [arg5]
 ```
 bonus part:
 ``` sh
 cd philo_bonus && make bonus
+
+./philo_bonus [arg1] [arg2] [arg3] [arg4] [arg5]
 ```
-3. Run the simulation
-
-Program should take the following arguments:
-
-**number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]**
-- number_of_philosophers: The number of philosophers and also the number of forks.
-- time_to_die (in milliseconds): If a philosopher didn’t start eating time_to_die milliseconds since the beginning of their last meal or the beginning of the simulation, they die.
-- time_to_eat (in milliseconds): The time it takes for a philosopher to eat. During that time, they will need to hold two forks.
-- time_to_sleep (in milliseconds): The time a philosopher will spend sleeping.
-- number_of_times_each_philosopher_must_eat (optional argument): If all philosophers have eaten number_of_times_each_philosopher_must_eat times, the simulation stops. If not specified, the simulation stops when a philosopher dies.
+- arg1: The number of philosophers and also the number of forks.
+- arg2: If a philosopher didn’t start eating time_to_die milliseconds since the beginning of their last meal or the beginning of the simulation, they die.
+- arg3: The time it takes for a philosopher to eat (in milliseconds). During that time, they will need to hold two forks.
+- arg4: The time a philosopher will spend sleeping (in milliseconds).
+- arg5 (optional argument): If all philosophers have eaten number_of_times_each_philosopher_must_eat times, the simulation stops. If not specified, the simulation stops when a philosopher dies.
 
 Some cases for the mandatory part:
 ```
