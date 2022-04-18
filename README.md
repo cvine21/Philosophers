@@ -27,7 +27,7 @@ This project simulates **the dining philosophers problem** that states that N ph
 ## How to run the simulation
 1. Clone this repo and go to the cloned directoty
 ``` sh
-https://github.com/cvine21/philosophers.git
+git clone https://github.com/cvine21/philosophers.git
 
 cd philosophers/
 ```
