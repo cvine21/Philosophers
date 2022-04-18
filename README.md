@@ -1,4 +1,4 @@
-div id="header" align="center">
+<div id="header" align="center">
   <h1>
     Philosophers
   </h1>
@@ -16,16 +16,13 @@ This project simulates **the dining philosophers problem** that states that N ph
 
 ## Mandatory part
 - Each philosopher is a thread.
-- There is one fork between each pair of philosophers. Therefore, if there are several
-philosophers, each philosopher has a fork on their left side and a fork on their right
-side.
+- There is one fork between each pair of philosophers. Therefore, if there are several philosophers, each philosopher has a fork on their left side and a fork on their right side.
 - Forks states are protected from duplicating with a mutex for each of them.
 
 ## Bonus part
 - Each philosopher is a process.
 - All the forks are put in the middle of the table.
-- They have no states in memory but the number of available forks is represented by
-a semaphore.
+- They have no states in memory but the number of available forks is represented by a semaphore.
 
 ## How to run the simulation
 1. Clone this repo and go to the cloned directoty
@@ -37,29 +34,34 @@ cd Philosophers/
 ``` sh
 cd philo && make
 ```
-for the bonus part:
+bonus part:
 ``` sh
 cd philo_bonus && make bonus
 ```
-3. Run simulation
+3. Run the simulation
 
 Program should take the following arguments:
 
 **number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]**
-- number_of_philosophers: The number of philosophers and also the number
-of forks.
-- time_to_die (in milliseconds): If a philosopher didn’t start eating time_to_die
-milliseconds since the beginning of their last meal or the beginning of the simulation, they die.
-- time_to_eat (in milliseconds): The time it takes for a philosopher to eat.
-During that time, they will need to hold two forks.
+- number_of_philosophers: The number of philosophers and also the number of forks.
+- time_to_die (in milliseconds): If a philosopher didn’t start eating time_to_die milliseconds since the beginning of their last meal or the beginning of the simulation, they die.
+- time_to_eat (in milliseconds): The time it takes for a philosopher to eat. During that time, they will need to hold two forks.
 - time_to_sleep (in milliseconds): The time a philosopher will spend sleeping.
-- number_of_times_each_philosopher_must_eat (optional argument): If all
-philosophers have eaten at least number_of_times_each_philosopher_must_eat
-times, the simula
+- number_of_times_each_philosopher_must_eat (optional argument): If all philosophers have eaten number_of_times_each_philosopher_must_eat times, the simulation stops. If not specified, the simulation stops when a philosopher dies.
 
-Some cases of mandatory part simulation:
-./philo 5   800 200 200		     	# should live
-./philo 5   800 200 200 7       # everyone should eat at least 7 times
-
-
-
+Some cases for the mandatory part:
+```
+./philo 1 800 200 200     - the philosopher should not eat and should die.
+./philo 5 800 200 200     - no one should die.
+./philo 5 800 200 200 7   - no one should die and the simulation should stop when all the philospher everyone has eaten 7 times.
+./philo 4 410 200 200     - no one should die.
+./philo 4 310 200 100     - a philosopher should die.
+```
+bonus part:
+```
+./philo_bonus 1 800 200 200     - the philosopher should not eat and should die.
+./philo_bonus 5 800 200 200     - no one should die.
+./philo_bonus 5 800 200 200 7   - no one should die and the simulation should stop when all the philospher everyone has eaten 7 times.
+./philo_bonus 4 410 200 200     - no one should die.
+./philo_bonus 4 310 200 100     - a philosopher should die.
+```
