@@ -27,21 +27,26 @@ This project simulates **the dining philosophers problem** that states that N ph
 ## How to run the simulation
 1. Clone this repo and go to the cloned directoty
 ``` sh
-git clone https://github.com/cvine21/philosophers.git
-
-cd philosophers/
+$> git clone https://github.com/cvine21/philosophers.git
+$> cd philosophers/
 ```
-2. Run the simulation for the mandatory part:
-``` sh
-cd philo && make
+2. Run the simulation:
 
-./philo [arg1] [arg2] [arg3] [arg4] [arg5]
+  Mandatory part:
+``` sh
+$> cd philo && make
 ```
-bonus part:
+Program will be executed as follows:
 ``` sh
-cd philo_bonus && make bonus
-
-./philo_bonus [arg1] [arg2] [arg3] [arg4] [arg5]
+$> ./philo arg1 arg2 arg3 arg4 arg5
+```
+  Bonus part:
+``` sh
+$> cd philo_bonus && make bonus
+```
+Program will be executed as follows:
+``` sh
+$> ./philo_bonus arg1 arg2 arg3 arg4 arg5
 ```
 - arg1: The number of philosophers and also the number of forks.
 - arg2: If a philosopher didn’t start eating time_to_die milliseconds since the beginning of their last meal or the beginning of the simulation, they die.
